@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:XamarinShoppingCart"
+             Title="Catalog"
+             x:Class="XamarinShoppingCart.MainPage">
+
+    <StackLayout Margin="20,35,20,20">
+        <ListView ItemsSource="{Binding ProductCatalogs}"
+                  x:Name="listView"
+                  HasUnevenRows="true"
+                  ItemSelected="OnListViewItemSelected"
+                  ItemTapped="OnListViewItemTapped">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Padding="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="25" />
+                                <RowDefinition Height="25" />
+                                <RowDefinition Height="25" />
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="50" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50" />
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Row="0"
+                                   Grid.Column="0"
+                                   Grid.ColumnSpan="2"
+                                   LineBreakMode="WordWrap"
+                                   Text="{Binding Product.Name}"
+                                   FontAttributes="Bold" />
+
+                            <Label Grid.Row="1"
+                                   Grid.Column="0"
+                                   Grid.ColumnSpan="2"
+                                   FontSize="Small"
+                                   Text="{Binding Product.Sku}" />
+
+                            <Label Grid.Row="2"
+                                   Grid.Column="0"
+                                   Grid.ColumnSpan="2"
+                                   Text="{Binding PriceWithCurrency}" />
+
+                            <!--<Label Grid.Row="4"
+                                   Grid.Column="0"
+                                   Text="Uom" />-->
+
+                            <Label Grid.Row="4"
+                                   Grid.Column="0"
+                                   Text="Qty : " />
+                            
+                            <!--<Picker Grid.Row="5"
+                                    Grid.Column="0"
+                                    Title="List of Item"
+                                    ItemsSource ="{Binding Attributes[0].Options}"
+                                    ItemDisplayBinding="{Binding .}" />-->
+
+                            <!--<Picker Grid.Row="5"
+                                    Grid.Column="0"
+                                    TextColor="Red"
+                                    SelectedIndex="0">
+                                <Picker.ItemsSource>
+                                    <x:Array Type="{x:Type x:String}">
+                                        <x:String>Qty</x:String>
+                                    </x:Array>
+                                </Picker.ItemsSource>
+                            </Picker>-->            
+
+                            <Stepper Grid.Row="5"
+                                     Grid.Column="0"
+                                     Grid.ColumnSpan="2"
+                                     x:Name="stepper"
+                                     Value="{Binding Qty}"
+                                     Minimum="1" 
+                                     Maximum="99" 
+                                     Increment="1" />
+                            
+                            <Label Grid.Row="4"
+                                   Grid.Column="1"
+                                   FontAttributes="Bold"
+                                   BindingContext="{x:Reference stepper}"
+                                   Text="{Binding Value, Mode=TwoWay}" />
+
+                            <!--<Entry Grid.Row="4"
+                                   Grid.Column="1"
+                                   BindingContext="{x:Reference stepper}"
+                                   Text="{Binding Value, Mode=TwoWay}" />-->
+
+                            <Image Grid.RowSpan="4" 
+                                   Grid.Column="2"
+                                   Source="{Binding Product.Images[0].Src}"
+                                   WidthRequest="60" />
+
+                            <Button Grid.Row="5"
+                                    Grid.Column="2"
+                                    Text="Add To Cart"
+                                    FontAttributes="Bold"
+                                    CommandParameter="{Binding .}"
+                                    Clicked="OnAddToCartButtonClicked"/>
+
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+
+</ContentPage>

@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Title="Cart"
+
+             x:Class="XamarinShoppingCart.Views.CartPage">
+    <ContentPage.Content>
+        <StackLayout Margin="20,35,20,20">
+            <!--<Frame>
+                <Label Text="Cart Items" FontAttributes="Bold" />
+            </Frame>-->
+            <ListView ItemsSource="{Binding CartItems, Mode=TwoWay}"
+                  x:Name="listView"
+                  HasUnevenRows="true">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Padding="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="25" />
+                                    <RowDefinition Height="25" />
+                                    <RowDefinition Height="25" />
+                                    <RowDefinition Height="50" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50" />
+                                    <ColumnDefinition Width="100" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Row="0"
+                                   Grid.Column="0"
+                                   Grid.ColumnSpan="2"
+                                   LineBreakMode="WordWrap"
+                                   Text="{Binding Product.Name}"
+                                   FontAttributes="Bold" />
+
+                                <Label Grid.Row="1"
+                                   Grid.Column="0"
+                                   Grid.ColumnSpan="2"
+                                   FontSize="Small"
+                                   Text="{Binding Product.Sku}" />
+
+                                <Label Grid.Row="2"
+                                   Grid.Column="0"
+                                   Grid.ColumnSpan="2"
+                                   Text="{Binding PriceWithCurrency}" />
+
+                                <Label Grid.Row="3"
+                                   Grid.Column="0"
+                                   Text="Qty" />
+
+                                <Label Grid.Row="3"
+                                   Grid.Column="1"
+                                   FontAttributes="Bold"
+                                   Text="{Binding Qty}" />
+
+                                <Image Grid.RowSpan="3" 
+                                   Grid.Column="2"
+                                   Source="{Binding Product.Images[0].Src}"
+                                   WidthRequest="60" />
+
+                                <Button Grid.Row="4"
+                                    Grid.Column="2"
+                                    Text="Remove"
+                                    FontAttributes="Bold"
+                                    CommandParameter="{Binding .}"
+                                    Clicked="OnRemoveButtonClicked"/>
+
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
