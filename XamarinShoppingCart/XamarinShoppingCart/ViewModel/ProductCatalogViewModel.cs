@@ -32,7 +32,7 @@ namespace XamarinShoppingCart.ViewModel
             //test server connection
             var serverOnline = false;
             Task.Run(async () => { serverOnline = await TestServerConnection(_client); }).Wait();
-            serverOnline = false;
+            
             //retrieve data for product catalog
             if (serverOnline)
             {
