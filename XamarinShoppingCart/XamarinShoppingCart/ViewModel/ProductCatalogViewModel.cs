@@ -32,7 +32,7 @@ namespace XamarinShoppingCart.ViewModel
             //test server connection
             var serverOnline = false;
             Task.Run(async () => { serverOnline = await TestServerConnection(_client); }).Wait();
-
+            serverOnline = false;
             //retrieve data for product catalog
             if (serverOnline)
             {
@@ -195,13 +195,14 @@ namespace XamarinShoppingCart.ViewModel
 
         public static async Task<List<Product>> ReadProductDataFromFile(string ProductListFile)
         {
+            List<Product> results = new List<Product>();
             try
             {
                 var StoredFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), ProductListFile);
 
                 if (StoredFile == null || !File.Exists(StoredFile))
                 {
-                    return null;
+                    return results;
                 }
 
                 string FileData = string.Empty;
@@ -220,14 +221,14 @@ namespace XamarinShoppingCart.ViewModel
                     MissingMemberHandling = MissingMemberHandling.Ignore
                 };
 
-                List<Product> results = JsonConvert.DeserializeObject<List<Product>>(FileData, settings);
+                results = JsonConvert.DeserializeObject<List<Product>>(FileData, settings);
 
                 return results;
             }
             catch (Exception ex)
             {
                 Debug.WriteLine("\tERROR {0}", ex.Message);
-                return null;
+                return results;
             }
         }
 

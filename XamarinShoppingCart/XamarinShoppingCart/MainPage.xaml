@@ -95,7 +95,7 @@
                             <Image Grid.RowSpan="4" 
                                    Grid.Column="2"
                                    Source="{Binding Product.Images[0].Src}"
-                                   WidthRequest="60" />
+                                   WidthRequest="90" />
 
                             <Button Grid.Row="5"
                                     Grid.Column="2"
